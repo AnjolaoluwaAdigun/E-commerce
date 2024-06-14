@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BB Mall| Dashboard</title>
+    <link rel="stylesheet" href="../css/stylee.css">
+</head>
+<body>
+    <h3>BB Mall</h3>
+    <p>Providing safe and convenient way to Shop digitally</p>
+    <hr>
+    <h3>Merchant Dashboard</h3>
+    <p>Merchant ID: <span style="color: blue;"><%- mid %></span></p>
+    <p>Merchant Username: <span style="color: blue;"><%- uname %></span></p>
+    <hr>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/addProduct">Add Product</a>
+    <a href="/viewProduct">View Products</a>
+    <a href="/logout">Click To Logout</a>
+    <hr>
+    <h3>Edit Page</h3>
+    <form action="/edit/<%- record._id %>" method="post">
+			
+        <p>Product Name: <input type="text" name="productName" value="<%- record.productName %>"></p>
+        <p>Description: <br><textarea name="description" rows="7" cols="15"><%- record.description %></textarea></p>
+        <p>Price (₦):: <input type="number" name="price" placeholder="₦" value="<%- record.price %>"></p>
+  
+        <input type="submit" value="Click to Edit" name="">
+  
+      </form>
+</body>
+</html>

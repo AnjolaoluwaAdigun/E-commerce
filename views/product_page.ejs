@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BBMall | Home</title>
+    <link rel="stylesheet" type="text/css" href="../css/style3.css">
+</head>
+<body>
+    <section class="header">
+        <h3><a href="/">BB Mall</a></h3>
+        <form action="/search" method="post">
+            <input type="text" name="searchParam" size="50" placeholder="Search for products and Brands">
+            <input type="submit" value="Search">
+        </form>
+        <p>+2348022455727</p>
+    </section>
+    <section class="grid-container">
+        <ul class="sticky-list">
+            <li><a href="/product/Computer">Computers</a></li>
+            <li><a href="/product/Phone">Phones</a></li>
+            <li><a href="/product/Tablets">Tablets</a></li>
+            <li><a href="/product/Printers">Printers</a></li>
+            <li><a href="/product/Accessories">Accessories</a></li>
+        </ul>
+        <section class="items">
+            <% results.forEach((result) => { %>  
+            <div class="boxx">
+                <div class="image-container">
+                    <img src="data:images/<%- result.image.contentType %>;base64,<%- result.image.data.toString('base64') %>" alt="Product Image">
+                </div>
+                <div class="product-details">
+                    <h5 class="card-title"><%- result.productName %></h5>
+                    <p class="card-text description"><%- result.description %></p>
+                    <p class="card-text">Price: <strong>₦<%- result.price %></strong></p>
+                    <a href="/details/<%- result._id %>">View Details</a>
+                </div>
+            </div>
+            <% }) %>
+        </section>
+    </section>
+    <footer class="footer">
+        <a href="/login">Merchant Login</a>
+        <a href="/registration">Merchant SignUp</a>
+    </footer>
+    <script>
+        // JavaScript for "Read more" functionality
+        document.addEventListener("DOMContentLoaded", () => {
+            const descriptions = document.querySelectorAll(".description");
+            descriptions.forEach(description => {
+                if (description.textContent.length > 100) {
+                    const readMore = document.createElement("span");
+                    readMore.textContent = "... Read more";
+                    readMore.style.color = "blue";
+                    readMore.style.cursor = "pointer";
+                    const fullText = description.textContent;
+                    description.textContent = description.textContent.substring(0, 100);
+                    description.appendChild(readMore);
+
+                    readMore.addEventListener("click", () => {
+                        if (readMore.textContent === "... Read more") {
+                            description.textContent = fullText;
+                            readMore.textContent = " Show less";
+                        } else {
+                            description.textContent = fullText.substring(0, 100);
+                            description.appendChild(readMore);
+                            readMore.textContent = "... Read more";
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

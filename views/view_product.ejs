@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BB Mall</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffeef3;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h3, h5 {
+            color: #ff69b4;
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        .links-container a {
+            margin-right: 10px;
+            text-decoration: none;
+            color: #ff69b4;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ff69b4;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #ff69b4;
+            color: white;
+        }
+
+        td img {
+            width: 100px;
+        }
+
+        button {
+            background-color: #ff69b4;
+            padding: 8px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button a {
+            text-decoration: none;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #ff85c1;
+        }
+
+        .message {
+            color: blue;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+
+</style>
+</head>
+<body>
+<h3>BB Mall</h3>
+<p>Providing Safe and Convenient Digital Shopping Experience</p>
+
+<p>Merchant ID: <span style="color:blue"><%- mid %></span></p>
+<p>Logged in Merchant: <span style="color:blue"><%- uname %></span></p>
+
+<hr>
+<a href="/dashboard">Dashboard</a>
+<a href="/addProduct">Add Product</a>
+<a href="/viewProduct">View Product</a>
+<a href="/logout">Click to Logout</a>
+
+<hr>
+<h3>Your Products</h3>
+
+<!-- <% if(message != ''){ %>
+        <h5 style="color:blue"><%- message %></h5>
+<% } %>
+
+ <% if(error_msg != '') { %>
+        
+                <h5 style="color:red"><%- error_msg %></h5>
+<% } %> -->
+
+
+<table border="1" style="border-collapse: collapse;">
+        
+        <tr>
+            <th>image</th>
+            <th>Product Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Brand Manufacturer</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <tr>
+            <% results.forEach((r) => { %>
+                <td><img width="100" src="data:images/<%- r.image.contentType %>;base64,
+                            <%- r.image.data.toString('base64') %>"></td>
+                <td><%- r.productName %></td>
+                <td><%- r.description %></td>
+                <td><%- r.price %></td>
+                <td><%- r.category %></td>
+                <td><%- r.brand %></td>
+                <td><button><a href="/edit/<%- r._id %>">Edit Product</a></button></td>
+                <td><button><a href="/delete/<%- r._id %>">Delete Product</a></button></td>
+
+        </tr>
+            <% }) %>
+        
+
+</table>
+
+</body>
+
+</html>

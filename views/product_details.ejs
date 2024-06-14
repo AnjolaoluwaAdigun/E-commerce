@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BBMall| Home</title>
+    <link rel="stylesheet" type="text/css" href="../css/style2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <section class="header">
+        <h3> <a href="/">BB Mall</a></h3>
+
+        <form action="/search" method="post">
+            <input type="text" name="searchParam" size="50" placeholder="Search for products and Brands">
+            <input type="submit" value="Search " name="">
+        </form>
+
+        <p>+2348022455727</p>
+    </section>
+    <section class="grid-container">
+        <ul>
+            <li><a href="/product/Computer">Computers</a></li>
+            <li><a href="/product/Phone">Phones</a></li>
+            <li><a href="/product/Tablets">Tablets</a></li>
+            <li><a href="/product/Printers">Printers</a></li>
+            <li><a href="/product/Accesories">Accesories</a></li>
+        </ul>
+   
+    <section class="items">
+        <h3>Product Details</h3>
+   
+        <div class="boxx">
+            <div>
+                <img src="data:images/<%- result.image.contentType %>;base64,
+                            <%- result.image.data.toString('base64') %>">
+            </div>
+            <h5 class="card-title" align="center"><%-result.productName %></h5>
+            <p class="card-text"><%-result.description %></p>
+            <p class="card-text">Manufacturer: <strong><%- result.brand %></strong></p>
+            <p class="card-text">Price: <strong><%- result.price %></strong></p>
+
+            <form action="/add_cart" method="post">
+
+                <input type="hidden" name="product_id" value="<%- result._id %>">
+                <input type="hidden" name="productName" value="<%-result.productName %>">
+                <input type="hidden" name="price" value="<%-result.price %>">
+
+                <input type="submit" value="Add to Cart" class="Cart"><i class="fa-solid fa-cart-shopping"></i>
+            </form>
+          
+        </div>
+       
+        <hr>
+       
+        <section class="cart-summary">
+            <table border="1">
+                <tr>
+                    <th>Item Name</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Total Price</th>
+                    <th>Remove</th>
+                </tr>
+                <% if (cart.length > 0) {  
+                    let total = 0;
+                    const aggregatedCart = cart.reduce((acc, item) => {
+                        const existingItem = acc.find(i => i.product_id === item.product_id);
+                        if (existingItem) {
+                            existingItem.quantity += item.quantity;
+                        } else {
+                            acc.push({...item});
+                        }
+                        return acc;
+                    }, []);
+    
+                    aggregatedCart.forEach((item) => { 
+                        total += item.quantity * item.price;
+                %>
+                <tr>
+                    <td><%= item.productName %></td>
+                    <td><%= item.quantity %></td>
+                    <td><%= item.price %></td>
+                    <td><%= (item.quantity * item.price).toFixed(2) %></td>
+                    <td><button type="button" onclick="remove_item('<%= item.product_id %>')">Remove</button></td>
+                </tr>
+                <% }) %>
+                <tr>
+                    <td colspan="3" align="right"><b>Total</b></td>
+                    <td><%= total.toFixed(2) %></td>
+                    <td>&nbsp;</td>
+                </tr>
+                <% } else { %>
+                <tr>
+                    <td colspan="5" align="center">No items found in cart</td>
+                </tr>
+                <% } %>
+            </table>
+        </section>
+    </section>   
+    </section>
+</section>
+    <footer class="footer">
+        <a href="/login">Merchant Login</a>
+        <a href="/registration">Merchant SignUp</a>
+    </footer>
+
+    <script type="text/javascript">
+        function remove_item(item_id) {
+            if (confirm("Are you sure you want to remove this item?")) {
+                window.location.href = `/remove_item?id=${item_id}`;
+            }
+        }
+    </script>
+</body>
+</html>

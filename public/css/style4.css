@@ -1,0 +1,142 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+header {
+    width: 100%;
+    height: 120px;
+    background-color: purple;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    padding: 0 5%;
+}
+
+header form input[type=text] {
+    height: 40px;
+}
+
+header form input[type=submit] {
+    height: 39.5px;
+    width: 150px;
+    margin-left: -15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.grid-container {
+    width: 90%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 20% 80%;
+    margin-top: 20px;
+}
+
+.sticky-list {
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    top: 20px; /* Adjust as needed */
+    list-style-type: none;
+    background-color: purple;
+    padding: 0;
+    margin: 0;
+    align-self: start; /* Ensure it starts from the top of the container */
+}
+
+.sticky-list li {
+    border-bottom: 1px solid #fff;
+}
+
+.sticky-list li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 15px 20px;
+}
+
+.sticky-list li a:hover {
+    background-color: #fff;
+    color: purple;
+}
+
+.items-container {
+    padding: 20px;
+}
+
+.items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+}
+
+.boxx {
+    border: 1px solid purple;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px; /* Adjust as needed */
+    width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.img-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Change to 'cover' if you want the image to fill the container */
+}
+
+.product-details {
+    text-align: center;
+    width: 100%;
+}
+
+.product-details h5 {
+    margin: 10px 0;
+    font-size: 1.2em;
+    color: purple;
+}
+
+.product-details p {
+    margin: 5px 0;
+}
+
+.footer {
+    width: 100%;
+    height: 120px;
+    background-color: purple;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer a {
+    color: #fff;
+    font-size: 18px;
+    font-weight: bolder;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.footer a:hover {
+    color: #f2f2f2;
+}

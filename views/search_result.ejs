@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCC Mall | Product Details</title>
+    <link rel="stylesheet" href="../css/style4.css">
+</head>
+<body>
+    <header>
+        <h3><a href="/">BB Mall</a></h3>
+        <form action="/search" method="post">
+            <input type="text" name="searchParam" size="50" placeholder="Search for products and brands">
+            <input type="submit" value="Search">
+        </form>
+        <p>+234-916-226-7136</p>
+    </header>
+
+    <section class="grid-container">
+        <ul class="sticky-list">
+            <li><a href="/product/Computer">Computers</a></li>
+            <li><a href="/product/Phone">Phones</a></li>
+            <li><a href="/product/Tablets">Tablets</a></li>
+            <li><a href="/product/Printers">Printers</a></li>
+            <li><a href="/product/Accessories">Accessories</a></li>
+        </ul>
+
+        <div class="items-container">
+            <h3><%= searchParam + " Products" %></h3>
+            <section class="items">           
+                <% results.forEach((result) => { %>
+                    <div class="boxx">
+                        <div class="img-container">
+                            <img src="data:images/<%= result.image.contentType %>;base64,<%= result.image.data.toString('base64') %>" alt="Product Image">
+                        </div>
+                        <div class="product-details">
+                            <h5 class="card-title"><%= result.productName %></h5>
+                            <p class="card-text description"><%= result.description %></p>
+                            <p class="card-text">Price: <strong>₦<%= result.price %></strong></p>
+                            <a href="/details/<%= result._id %>">View Details</a>
+                        </div>
+                    </div>
+                <% }) %>
+            </section>
+        </div>
+    </section>
+
+    <footer>
+        <a href="/login">Merchant Login</a>
+        <a href="/registration">Merchant Sign Up</a>
+    </footer>
+
+    <script>
+        // JavaScript for "Read more" functionality
+        document.addEventListener("DOMContentLoaded", () => {
+            const descriptions = document.querySelectorAll(".description");
+            descriptions.forEach(description => {
+                if (description.textContent.length > 100) {
+                    const readMore = document.createElement("span");
+                    readMore.textContent = "... Read more";
+                    readMore.style.color = "blue";
+                    readMore.style.cursor = "pointer";
+                    const fullText = description.textContent;
+                    description.textContent = description.textContent.substring(0, 100);
+                    description.appendChild(readMore);
+
+                    readMore.addEventListener("click", () => {
+                        if (readMore.textContent === "... Read more") {
+                            description.textContent = fullText;
+                            readMore.textContent = " Show less";
+                        } else {
+                            description.textContent = fullText.substring(0, 100);
+                            description.appendChild(readMore);
+                            readMore.textContent = "... Read more";
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

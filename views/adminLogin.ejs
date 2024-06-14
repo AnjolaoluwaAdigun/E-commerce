@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BB Mall | Admin Login</title>
+    <link rel="stylesheet" href="../css/stylee.css">
+</head>
+<body>
+   <div class="header">
+        <h1><a href="/">BB Mall</a></h1>
+        <div class="links-container">
+            <a href="/adminLogin">Login</a>
+            <a href="/adminRegistration">Admin Signup Form</a>
+        </div>
+    </div>
+   <p>We provide a safe and comfy digital shopping experience</p>
+   <hr>
+   <% if(message !== '') { %>
+        <h5 style="color: blue;"><%- message %></h5>
+    <%}%>
+    <% if(error_msg !== '') { %>
+        <h5 style="color: red;"><%- error_msg %></h5>
+    <%}%>
+    
+    <h3>Admin Login Form</h3>
+    <p>Please enter your username and password</p>
+    <form action="/adminLogin" method="post">
+        <p>Username: <input type="text" name="username" id=""></p>
+        <p>Password: <input type="password" name="password" id=""></p>
+        <input type="submit" value="Click To Login">
+    </form>
+</body>
+</html>
